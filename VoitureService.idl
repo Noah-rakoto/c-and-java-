@@ -1,0 +1,18 @@
+// VoitureService.idl
+module CobraService {
+    
+    // Structure pour représenter une voiture
+    struct Voiture {
+        string nom;
+        string marque;
+    };
+    
+    // Séquence (liste) de voitures
+    typedef sequence<Voiture> VoitureList;
+    
+    // Interface du service
+    interface VoitureService {
+        // Récupère toutes les voitures de la base
+        VoitureList getVoitures();
+    };
+};
