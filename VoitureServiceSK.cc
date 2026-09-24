@@ -198,6 +198,139 @@ CobraService::VoitureList* CobraService::_objref_VoitureService::getVoitures()
 
 }
 
+
+//
+// Code for CobraService::VoitureService::ajouterVoiture
+
+// Proxy call descriptor class. Mangled signature:
+//  void_i_cCobraService_mVoiture
+class _0RL_cd_f5cf5122317f7842_20000000
+  : public omniCallDescriptor
+{
+public:
+  inline _0RL_cd_f5cf5122317f7842_20000000(LocalCallFn lcfn, const char* op_, size_t oplen, _CORBA_Boolean upcall=0)
+    : omniCallDescriptor(lcfn, op_, oplen, 0, _user_exns, 0, upcall)
+  {
+    
+  }
+  
+  void marshalArguments(cdrStream&);
+  void unmarshalArguments(cdrStream&);
+
+    
+  
+  static const char* const _user_exns[];
+
+  CobraService::Voiture_var arg_0_;
+  const CobraService::Voiture* arg_0;
+};
+
+void _0RL_cd_f5cf5122317f7842_20000000::marshalArguments(cdrStream& _n)
+{
+  (const CobraService::Voiture&) *arg_0 >>= _n;
+
+}
+
+void _0RL_cd_f5cf5122317f7842_20000000::unmarshalArguments(cdrStream& _n)
+{
+  arg_0_ = new CobraService::Voiture;
+  (CobraService::Voiture&)arg_0_ <<= _n;
+  arg_0 = &arg_0_.in();
+
+}
+
+const char* const _0RL_cd_f5cf5122317f7842_20000000::_user_exns[] = {
+  0
+};
+
+// Local call call-back function.
+static void
+_0RL_lcfn_f5cf5122317f7842_30000000(omniCallDescriptor* cd, omniServant* svnt)
+{
+  _0RL_cd_f5cf5122317f7842_20000000* tcd = (_0RL_cd_f5cf5122317f7842_20000000*)cd;
+  CobraService::_impl_VoitureService* impl = (CobraService::_impl_VoitureService*) svnt->_ptrToInterface(CobraService::VoitureService::_PD_repoId);
+  impl->ajouterVoiture(*tcd->arg_0);
+
+
+}
+
+void CobraService::_objref_VoitureService::ajouterVoiture(const ::CobraService::Voiture& v)
+{
+  _0RL_cd_f5cf5122317f7842_20000000 _call_desc(_0RL_lcfn_f5cf5122317f7842_30000000, "ajouterVoiture", 15);
+  _call_desc.arg_0 = &(::CobraService::Voiture&) v;
+
+  _invoke(_call_desc);
+
+
+
+}
+
+
+//
+// Code for CobraService::VoitureService::lireVoituresDepuisFichier
+
+// Proxy call descriptor class. Mangled signature:
+//  void_i_cstring
+class _0RL_cd_f5cf5122317f7842_40000000
+  : public omniCallDescriptor
+{
+public:
+  inline _0RL_cd_f5cf5122317f7842_40000000(LocalCallFn lcfn, const char* op_, size_t oplen, _CORBA_Boolean upcall=0)
+    : omniCallDescriptor(lcfn, op_, oplen, 0, _user_exns, 0, upcall)
+  {
+    
+  }
+  
+  void marshalArguments(cdrStream&);
+  void unmarshalArguments(cdrStream&);
+
+    
+  
+  static const char* const _user_exns[];
+
+  ::CORBA::String_var arg_0_;
+  const char* arg_0;
+};
+
+void _0RL_cd_f5cf5122317f7842_40000000::marshalArguments(cdrStream& _n)
+{
+  _n.marshalString(arg_0,0);
+
+}
+
+void _0RL_cd_f5cf5122317f7842_40000000::unmarshalArguments(cdrStream& _n)
+{
+  arg_0_ = _n.unmarshalString(0);
+  arg_0 = arg_0_.in();
+
+}
+
+const char* const _0RL_cd_f5cf5122317f7842_40000000::_user_exns[] = {
+  0
+};
+
+// Local call call-back function.
+static void
+_0RL_lcfn_f5cf5122317f7842_50000000(omniCallDescriptor* cd, omniServant* svnt)
+{
+  _0RL_cd_f5cf5122317f7842_40000000* tcd = (_0RL_cd_f5cf5122317f7842_40000000*)cd;
+  CobraService::_impl_VoitureService* impl = (CobraService::_impl_VoitureService*) svnt->_ptrToInterface(CobraService::VoitureService::_PD_repoId);
+  impl->lireVoituresDepuisFichier(tcd->arg_0);
+
+
+}
+
+void CobraService::_objref_VoitureService::lireVoituresDepuisFichier(const char* nomFichier)
+{
+  _0RL_cd_f5cf5122317f7842_40000000 _call_desc(_0RL_lcfn_f5cf5122317f7842_50000000, "lireVoituresDepuisFichier", 26);
+  _call_desc.arg_0 = nomFichier;
+
+  _invoke(_call_desc);
+
+
+
+}
+
 CobraService::_pof_VoitureService::~_pof_VoitureService() {}
 
 
@@ -230,6 +363,22 @@ CobraService::_impl_VoitureService::_dispatch(omniCallHandle& _handle)
   if (omni::strMatch(op, "getVoitures")) {
 
     _0RL_cd_f5cf5122317f7842_00000000 _call_desc(_0RL_lcfn_f5cf5122317f7842_10000000, "getVoitures", 12, 1);
+    
+    _handle.upcall(this,_call_desc);
+    return 1;
+  }
+
+  if (omni::strMatch(op, "ajouterVoiture")) {
+
+    _0RL_cd_f5cf5122317f7842_20000000 _call_desc(_0RL_lcfn_f5cf5122317f7842_30000000, "ajouterVoiture", 15, 1);
+    
+    _handle.upcall(this,_call_desc);
+    return 1;
+  }
+
+  if (omni::strMatch(op, "lireVoituresDepuisFichier")) {
+
+    _0RL_cd_f5cf5122317f7842_40000000 _call_desc(_0RL_lcfn_f5cf5122317f7842_50000000, "lireVoituresDepuisFichier", 26, 1);
     
     _handle.upcall(this,_call_desc);
     return 1;

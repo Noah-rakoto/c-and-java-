@@ -1,7 +1,8 @@
+package com.cobra;
+
 import org.omg.CORBA.*;
 import java.io.*;
 import CobraService.*;
-import service.VoitureService;
 
 public class Client {
     public static void main(String[] args) {
@@ -18,10 +19,8 @@ public class Client {
             org.omg.CORBA.Object obj = orb.string_to_object(ior);
             VoitureService service = VoitureServiceHelper.narrow(obj);
 
-            // 4. Appelle la méthode distante
+            // 4. Appelle getVoitures et écrit dans un fichier
             Voiture[] voitures = service.getVoitures();
-
-            // 5. Écrit dans un fichier
             FileWriter fw = new FileWriter("voitures.txt");
             for (Voiture v : voitures) {
                 String ligne = "Nom: " + v.nom + ", Marque: " + v.marque + "\n";
@@ -29,8 +28,22 @@ public class Client {
                 fw.write(ligne);
             }
             fw.close();
-
             System.out.println("\nDonnées écrites dans voitures.txt");
+
+            // 5. Lit voitures.txt et envoie chaque voiture à C++ via CORBA pour insertion en base
+            System.out.println("\nInsertion des voitures du fichier dans la base...");
+            BufferedReader fichier = new BufferedReader(new FileReader("voitures.txt"));
+            String ligne;
+            while ((ligne = fichier.readLine()) != null) {
+                String[] parties = ligne.replace("Nom: ", "").replace("Marque: ", "").split(", ");
+                if (parties.length == 2) {
+                    Voiture v = new Voiture(parties[0], parties[1]);
+                    service.ajouterVoiture(v);
+                    System.out.println("Inséré : " + v.nom + " - " + v.marque);
+                }
+            }
+            fichier.close();
+            System.out.println("Insertion terminée !");
 
         } catch (Exception e) {
             System.err.println("Erreur: " + e.getMessage());

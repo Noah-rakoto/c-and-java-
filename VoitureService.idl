@@ -14,5 +14,12 @@ module CobraService {
     interface VoitureService {
         // Récupère toutes les voitures de la base
         VoitureList getVoitures();
+        
+        // Ajoute une voiture dans la base
+        void ajouterVoiture(in Voiture v);
+        
+        // Lit les voitures depuis un fichier txt et les envoie à C++ via CORBA
+        void lireVoituresDepuisFichier(in string nomFichier);
     };
+
 };

@@ -24,6 +24,28 @@ public:
         
         return liste;
     }
+    void ajouterVoiture(const CobraService::Voiture& v) {
+        repository->ajouterVoiture(v.nom.in(), v.marque.in());
+    }
+
+    void lireVoituresDepuisFichier(const char* nomFichier) {
+        std::ifstream fichier(nomFichier);
+        std::string ligne;
+
+        while (std::getline(fichier, ligne)) {
+            // format attendu depuis Java: "Nom: xxx, Marque: yyy"
+            size_t posNom = ligne.find("Nom: ");
+            size_t posMarque = ligne.find(", Marque: ");
+            if (posNom != std::string::npos && posMarque != std::string::npos) {
+                std::string nom = ligne.substr(5, posMarque - 5);
+                std::string marque = ligne.substr(posMarque + 10);
+                repository->ajouterVoiture(nom, marque);
+                std::cout << "Inséré depuis fichier : " << nom << ", " << marque << std::endl;
+            }
+        }
+    }
+
+    
 
 private:
     VoitureRepository* repository;

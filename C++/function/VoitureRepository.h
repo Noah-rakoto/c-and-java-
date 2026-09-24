@@ -12,6 +12,7 @@ private:
 public:
     VoitureRepository(Connection& conn);
     std::vector<Voiture> getVoitures();
+    void ajouterVoiture(const std::string& nom, const std::string& marque);
 };
 
 #endif // VOITURE_REPOSITORY_H

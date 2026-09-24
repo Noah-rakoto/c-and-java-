@@ -255,6 +255,8 @@ _CORBA_MODULE_BEG
   public:
     // IDL operations
     VoitureList* getVoitures();
+    void ajouterVoiture(const ::CobraService::Voiture& v);
+    void lireVoituresDepuisFichier(const char* nomFichier);
 
     // Constructors
     inline _objref_VoitureService()  { _PR_setobj(0); }  // nil
@@ -290,6 +292,8 @@ _CORBA_MODULE_BEG
     virtual ~_impl_VoitureService();
 
     virtual VoitureList* getVoitures() = 0;
+    virtual void ajouterVoiture(const ::CobraService::Voiture& v) = 0;
+    virtual void lireVoituresDepuisFichier(const char* nomFichier) = 0;
     
   public:  // Really protected, workaround for xlC
     virtual _CORBA_Boolean _dispatch(omniCallHandle&);
